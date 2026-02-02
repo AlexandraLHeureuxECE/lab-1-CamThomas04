@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   --bg: #0b1020;
   --card: rgba(255, 255, 255, 0.08);
   --card-border: rgba(255, 255, 255, 0.14);
@@ -11,6 +11,27 @@
   --x: #8ad7ff;
   --o: #ffb86b;
   --win: rgba(92, 255, 173, 0.28);
+  --page-bg: radial-gradient(1200px 800px at 20% 15%, rgba(138, 215, 255, 0.25), transparent 60%),
+    radial-gradient(900px 700px at 80% 30%, rgba(255, 184, 107, 0.2), transparent 55%),
+    radial-gradient(800px 600px at 50% 85%, rgba(92, 255, 173, 0.14), transparent 55%), var(--bg);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f7f9ff;
+  --card: rgba(11, 16, 32, 0.06);
+  --card-border: rgba(11, 16, 32, 0.14);
+  --text: rgba(11, 16, 32, 0.92);
+  --muted: rgba(11, 16, 32, 0.66);
+  --cell: rgba(11, 16, 32, 0.06);
+  --cell-border: rgba(11, 16, 32, 0.18);
+  --focus: #0066cc;
+  --x: #0077cc;
+  --o: #c95b00;
+  --win: rgba(0, 150, 80, 0.18);
+  --page-bg: radial-gradient(1200px 800px at 20% 15%, rgba(0, 119, 204, 0.12), transparent 60%),
+    radial-gradient(900px 700px at 80% 30%, rgba(201, 91, 0, 0.1), transparent 55%),
+    radial-gradient(800px 600px at 50% 85%, rgba(0, 150, 80, 0.1), transparent 55%), var(--bg);
 }
 
 * {
@@ -26,9 +47,7 @@ body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
     "Segoe UI Emoji";
-  background: radial-gradient(1200px 800px at 20% 15%, rgba(138, 215, 255, 0.25), transparent 60%),
-    radial-gradient(900px 700px at 80% 30%, rgba(255, 184, 107, 0.2), transparent 55%),
-    radial-gradient(800px 600px at 50% 85%, rgba(92, 255, 173, 0.14), transparent 55%), var(--bg);
+  background: var(--page-bg);
   color: var(--text);
 }
 
@@ -70,6 +89,11 @@ body {
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 12px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
 }
 
 .status {
@@ -148,4 +172,3 @@ body {
   line-height: 1.35;
   font-size: 0.95rem;
 }
-

@@ -17,7 +17,10 @@
       <section class="card" aria-label="Game">
         <div class="top-row">
           <p id="status" class="status" role="status" aria-live="polite"></p>
-          <button id="restart" class="button" type="button">Restart</button>
+          <div class="controls">
+            <button id="themeToggle" class="button" type="button" aria-pressed="true">Theme: Dark</button>
+            <button id="restart" class="button" type="button">Restart</button>
+          </div>
         </div>
 
         <div id="board" class="board" role="grid" aria-label="Tic-Tac-Toe board">
@@ -34,7 +37,7 @@
 
         <p class="help" id="help">
           Keyboard: Arrow keys move. Enter/Space places. Optional: press 1–9 (top-left = 1) to
-          place, or R to restart.
+          place, R to restart, and T to toggle theme.
         </p>
       </section>
     </main>

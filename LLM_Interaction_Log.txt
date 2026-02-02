@@ -26,3 +26,22 @@ Implemented a simple web-based Tic-Tac-Toe game using plain HTML/CSS/JavaScript:
 
 Files added: index.html, styles.css, script.js
 README updated with run/controls instructions.
+
+
+PROMPT #2:
+
+Add a configurable dark/light mode to the app
+
+RESPONSE:
+
+Added a light/dark theme toggle:
+- "Theme" button switches between Dark and Light modes
+- Choice is saved in localStorage and restored on refresh
+- If no choice is saved, the app follows the system color scheme
+- Keyboard shortcut: T toggles the theme
+
+PROMPT #2:
+
+Add a configurable dark/light mode to the app
+
+RESPONSE:

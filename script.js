@@ -1,8 +1,12 @@
 const boardEl = document.getElementById("board");
 const statusEl = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
+const themeToggleBtn = document.getElementById("themeToggle");
+const appEl = document.querySelector(".app");
 
 const cells = Array.from(boardEl.querySelectorAll(".cell"));
+
+const THEME_STORAGE_KEY = "tic-tac-toe-theme";
 
 const WINNING_LINES = [
   [0, 1, 2],
@@ -20,6 +24,59 @@ let currentPlayer = "X";
 let gameOver = false;
 let winningLine = null;
 let focusedIndex = 0;
+
+function normalizeTheme(value) {
+  return value === "dark" || value === "light" ? value : null;
+}
+
+function getStoredTheme() {
+  try {
+    return normalizeTheme(localStorage.getItem(THEME_STORAGE_KEY));
+  } catch {
+    return null;
+  }
+}
+
+function storeTheme(theme) {
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+  } catch {
+    // Ignore storage failures (privacy mode, blocked storage, etc.).
+  }
+}
+
+function getSystemTheme() {
+  if (!window.matchMedia) return "dark";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function updateThemeToggleUi(theme) {
+  if (!themeToggleBtn) return;
+
+  const isDark = theme === "dark";
+  themeToggleBtn.textContent = `Theme: ${isDark ? "Dark" : "Light"}`;
+  themeToggleBtn.setAttribute("aria-pressed", String(isDark));
+  themeToggleBtn.setAttribute(
+    "aria-label",
+    `Theme: ${isDark ? "Dark" : "Light"}. Activate to switch to ${isDark ? "Light" : "Dark"} mode.`,
+  );
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  updateThemeToggleUi(theme);
+}
+
+function setTheme(theme, { persist } = { persist: true }) {
+  applyTheme(theme);
+  if (persist) storeTheme(theme);
+}
+
+function toggleTheme() {
+  const current = normalizeTheme(document.documentElement.dataset.theme) ?? "dark";
+  const next = current === "dark" ? "light" : "dark";
+  setTheme(next);
+}
 
 function setStatus(message) {
   statusEl.textContent = message;
@@ -184,13 +241,26 @@ boardEl.addEventListener("keydown", (event) => {
   }
 });
 
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", () => {
+    toggleTheme();
+  });
+}
+
 document.addEventListener("keydown", (event) => {
   if (event.metaKey || event.ctrlKey || event.altKey) return;
 
   const active = document.activeElement;
-  const boardHasFocus = boardEl.contains(active) || active === document.body || active === document.documentElement;
+  const appHasFocus =
+    (appEl && appEl.contains(active)) || active === document.body || active === document.documentElement;
 
-  if (!boardHasFocus) return;
+  if (!appHasFocus) return;
+
+  if (event.key === "t" || event.key === "T") {
+    event.preventDefault();
+    toggleTheme();
+    return;
+  }
 
   if (event.key === "r" || event.key === "R") {
     event.preventDefault();
@@ -211,5 +281,21 @@ restartBtn.addEventListener("click", (event) => {
   restartGame({ focusBoard: keyboardActivated });
 });
 
-restartGame();
+const storedTheme = getStoredTheme();
+const initialTheme = storedTheme ?? getSystemTheme();
+setTheme(initialTheme, { persist: false });
 
+if (!storedTheme && window.matchMedia) {
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const handler = (event) => {
+    setTheme(event.matches ? "dark" : "light", { persist: false });
+  };
+
+  if (typeof media.addEventListener === "function") {
+    media.addEventListener("change", handler);
+  } else if (typeof media.addListener === "function") {
+    media.addListener(handler);
+  }
+}
+
+restartGame();

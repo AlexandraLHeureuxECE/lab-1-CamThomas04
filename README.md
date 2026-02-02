@@ -19,3 +19,4 @@ Simple two-player Tic-Tac-Toe playable in a browser (same device).
   - Enter / Space: place your mark (on the focused square)
   - `1`–`9`: place directly (top-left = `1`, bottom-right = `9`)
   - `R`: restart at any time
+  - `T`: toggle light/dark theme
