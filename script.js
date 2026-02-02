@@ -341,7 +341,6 @@ document.addEventListener("keydown", (event) => {
     event.preventDefault();
     const index = Number.parseInt(event.key, 10) - 1;
     setFocusedCell(index, { focus: true });
-    tryPlayAt(index);
   }
 });
 

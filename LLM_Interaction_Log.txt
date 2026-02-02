@@ -63,3 +63,15 @@ Moved the keyboard instructions into an "Instructions" modal:
 - Added an "Instructions" button in the game card header
 - Clicking it opens a pop-up dialog with concise gameplay + keyboard controls
 - The dialog can be closed via Close button, clicking outside, or Esc
+
+
+PROMPT #5:
+
+Change how the keyboard buttons 1-9 behave. Instead of placing direclty into those cells, it should just highlight them and the enter/space key is still needed to place in that cell. This means the numbers and the arrow keys are both simply ways of moving the cursor, the enter/space key is the only way to actually place using the keyboard. Update the instructions accordingly
+
+RESPONSE:
+
+Updated keyboard number-key behavior:
+- `1`–`9` now only moves focus to the selected square (no placement)
+- Enter/Space remains the only keyboard way to place a mark (arrow keys + numbers just move the cursor)
+- Updated the Instructions modal and README to match
