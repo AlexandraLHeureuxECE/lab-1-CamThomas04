@@ -75,3 +75,14 @@ Updated keyboard number-key behavior:
 - `1`–`9` now only moves focus to the selected square (no placement)
 - Enter/Space remains the only keyboard way to place a mark (arrow keys + numbers just move the cursor)
 - Updated the Instructions modal and README to match
+
+
+PROMPT #6:
+
+There seems to be a visual bug with the modal where the whole screen is gray (including the modal itself) when accessing through light mode. Fix this.
+
+RESPONSE:
+
+Adjusted the modal styling for light mode:
+- The modal now uses a more opaque surface color in light mode so it stays clearly distinct from the dimmed backdrop
+- The backdrop opacity is tuned per theme (lighter in light mode)
