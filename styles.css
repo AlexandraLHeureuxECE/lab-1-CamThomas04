@@ -89,10 +89,22 @@ body {
   box-shadow: 0 10px 50px rgba(0, 0, 0, 0.35);
 }
 
+.status-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  margin-bottom: 12px;
+}
+
+.status-card .status {
+  text-align: center;
+}
+
 .top-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 12px;
   margin-bottom: 12px;
 }

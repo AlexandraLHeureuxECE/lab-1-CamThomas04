@@ -86,3 +86,14 @@ RESPONSE:
 Adjusted the modal styling for light mode:
 - The modal now uses a more opaque surface color in light mode so it stays clearly distinct from the dimmed backdrop
 - The backdrop opacity is tuned per theme (lighter in light mode)
+
+
+PROMPT #7:
+
+Move the expository text (text that displays who's turn it is etc) above the game card in its own card so it doesn't affect the card size by wrapping downward when the game ends. Do this in a way that clear, clean and natural
+
+RESPONSE:
+
+Moved the status/expository text into its own "status" card above the game card:
+- The game card now contains only the controls + board, so it stays a consistent size even when end-game messages are longer
+- The status card is centered and has a stable minimum height for a cleaner layout
