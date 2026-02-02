@@ -1,0 +1,28 @@
+PROMPT #1:
+
+Build a simple, web-based Tic-Tac-Toe game for two people playing on the same device. The game should behave in a way that would feel familiar to someone who has played Tic-Tac-Toe before.
+Specific design and implementation decisions are intentionally left to you.
+
+Game Expectations:
+The application should allow players to:
+1) interact with a visible 3×3 grid,
+2) take turns,
+3) reach a clear game outcome,
+4) start a new game without refreshing the page.
+5) give the option to restart the game at any time
+.
+The interface should communicate what is happening as the game progresses.
+
+Required Extra Feature: Keyboard support. The game can be played intuitively without using a mouse.
+
+RESPONSE: 
+
+Implemented a simple web-based Tic-Tac-Toe game using plain HTML/CSS/JavaScript:
+- 3×3 clickable grid, alternating turns (X then O)
+- Status text shows whose turn it is and announces win/draw outcomes
+- Winning line is highlighted
+- Restart button works at any time (no page refresh required)
+- Keyboard support: Arrow keys move focus, Enter/Space places, 1–9 places directly (top-left=1), and R restarts
+
+Files added: index.html, styles.css, script.js
+README updated with run/controls instructions.

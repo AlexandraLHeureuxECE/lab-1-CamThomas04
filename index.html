@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <h1 class="title">Tic‑Tac‑Toe</h1>
+        <p class="subtitle">Two players, one device.</p>
+      </header>
+
+      <section class="card" aria-label="Game">
+        <div class="top-row">
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+          <button id="restart" class="button" type="button">Restart</button>
+        </div>
+
+        <div id="board" class="board" role="grid" aria-label="Tic-Tac-Toe board">
+          <button class="cell" type="button" data-index="0" role="gridcell" tabindex="0"></button>
+          <button class="cell" type="button" data-index="1" role="gridcell" tabindex="-1"></button>
+          <button class="cell" type="button" data-index="2" role="gridcell" tabindex="-1"></button>
+          <button class="cell" type="button" data-index="3" role="gridcell" tabindex="-1"></button>
+          <button class="cell" type="button" data-index="4" role="gridcell" tabindex="-1"></button>
+          <button class="cell" type="button" data-index="5" role="gridcell" tabindex="-1"></button>
+          <button class="cell" type="button" data-index="6" role="gridcell" tabindex="-1"></button>
+          <button class="cell" type="button" data-index="7" role="gridcell" tabindex="-1"></button>
+          <button class="cell" type="button" data-index="8" role="gridcell" tabindex="-1"></button>
+        </div>
+
+        <p class="help" id="help">
+          Keyboard: Arrow keys move. Enter/Space places. Optional: press 1–9 (top-left = 1) to
+          place, or R to restart.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
