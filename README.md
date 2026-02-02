@@ -20,3 +20,4 @@ Simple two-player Tic-Tac-Toe playable in a browser (same device).
   - `1`–`9`: jump focus (top-left = `1`, bottom-right = `9`)
   - `R`: restart at any time
   - `T`: toggle light/dark theme
+
