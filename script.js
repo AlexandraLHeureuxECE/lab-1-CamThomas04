@@ -2,6 +2,9 @@ const boardEl = document.getElementById("board");
 const statusEl = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
 const themeToggleBtn = document.getElementById("themeToggle");
+const instructionsBtn = document.getElementById("instructionsBtn");
+const instructionsDialog = document.getElementById("instructionsDialog");
+const instructionsCloseBtn = document.getElementById("instructionsClose");
 const appEl = document.querySelector(".app");
 
 const cells = Array.from(boardEl.querySelectorAll(".cell"));
@@ -24,6 +27,11 @@ let currentPlayer = "X";
 let gameOver = false;
 let winningLine = null;
 let focusedIndex = 0;
+let lastFocusBeforeDialog = null;
+
+function isDialogOpen() {
+  return Boolean(instructionsDialog && (instructionsDialog.open || instructionsDialog.hasAttribute("open")));
+}
 
 function normalizeTheme(value) {
   return value === "dark" || value === "light" ? value : null;
@@ -54,12 +62,12 @@ function updateThemeToggleUi(theme) {
   if (!themeToggleBtn) return;
 
   const isDark = theme === "dark";
-  themeToggleBtn.textContent = `Theme: ${isDark ? "Dark" : "Light"}`;
+  const nextTheme = isDark ? "light" : "dark";
+  const label = `Switch to ${nextTheme} mode`;
+
   themeToggleBtn.setAttribute("aria-pressed", String(isDark));
-  themeToggleBtn.setAttribute(
-    "aria-label",
-    `Theme: ${isDark ? "Dark" : "Light"}. Activate to switch to ${isDark ? "Light" : "Dark"} mode.`,
-  );
+  themeToggleBtn.setAttribute("aria-label", label);
+  themeToggleBtn.setAttribute("title", label);
 }
 
 function applyTheme(theme) {
@@ -76,6 +84,33 @@ function toggleTheme() {
   const current = normalizeTheme(document.documentElement.dataset.theme) ?? "dark";
   const next = current === "dark" ? "light" : "dark";
   setTheme(next);
+}
+
+function openInstructions() {
+  if (!instructionsDialog) return;
+  if (isDialogOpen()) return;
+
+  lastFocusBeforeDialog = document.activeElement;
+  if (typeof instructionsDialog.showModal === "function") {
+    instructionsDialog.showModal();
+  } else {
+    instructionsDialog.setAttribute("open", "");
+  }
+}
+
+function closeInstructions() {
+  if (!instructionsDialog) return;
+  if (!isDialogOpen()) return;
+
+  if (typeof instructionsDialog.close === "function") {
+    instructionsDialog.close();
+  } else {
+    instructionsDialog.removeAttribute("open");
+  }
+
+  if (lastFocusBeforeDialog && typeof lastFocusBeforeDialog.focus === "function") {
+    lastFocusBeforeDialog.focus({ preventScroll: true });
+  }
 }
 
 function setStatus(message) {
@@ -247,6 +282,32 @@ if (themeToggleBtn) {
   });
 }
 
+if (instructionsBtn) {
+  instructionsBtn.addEventListener("click", () => {
+    openInstructions();
+  });
+}
+
+if (instructionsCloseBtn) {
+  instructionsCloseBtn.addEventListener("click", () => {
+    closeInstructions();
+  });
+}
+
+if (instructionsDialog) {
+  instructionsDialog.addEventListener("click", (event) => {
+    if (event.target === instructionsDialog) {
+      closeInstructions();
+    }
+  });
+
+  instructionsDialog.addEventListener("cancel", (event) => {
+    // Keep behavior consistent across browsers and ensure focus returns.
+    event.preventDefault();
+    closeInstructions();
+  });
+}
+
 document.addEventListener("keydown", (event) => {
   if (event.metaKey || event.ctrlKey || event.altKey) return;
 
@@ -255,6 +316,14 @@ document.addEventListener("keydown", (event) => {
     (appEl && appEl.contains(active)) || active === document.body || active === document.documentElement;
 
   if (!appHasFocus) return;
+
+  if (isDialogOpen()) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeInstructions();
+    }
+    return;
+  }
 
   if (event.key === "t" || event.key === "T") {
     event.preventDefault();

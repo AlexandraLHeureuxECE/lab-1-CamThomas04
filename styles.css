@@ -93,7 +93,10 @@ body {
 
 .controls {
   display: flex;
+  align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .status {
@@ -120,6 +123,93 @@ body {
 .button:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
+}
+
+.icon-button {
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: calc(16px + env(safe-area-inset-top));
+  right: calc(16px + env(safe-area-inset-right));
+  z-index: 10;
+}
+
+.theme-toggle .icon {
+  display: none;
+}
+
+:root:not([data-theme="light"]) .theme-toggle .icon--sun {
+  display: block;
+}
+
+:root:not([data-theme="light"]) .theme-toggle .icon--moon {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-toggle .icon--moon {
+  display: block;
+}
+
+:root[data-theme="light"] .theme-toggle .icon--sun {
+  display: none;
+}
+
+.modal {
+  width: min(92vw, 520px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px;
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+}
+
+.modal:not([open]) {
+  display: none;
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.modal-body {
+  margin-top: 10px;
+}
+
+.modal-lead {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.modal-section-title {
+  margin: 14px 0 8px;
+  font-size: 1rem;
+}
+
+.modal-list {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.5;
 }
 
 .board {

@@ -9,6 +9,49 @@
   </head>
   <body>
     <main class="app">
+      <button
+        id="themeToggle"
+        class="button icon-button theme-toggle"
+        type="button"
+        aria-label="Switch theme"
+        title="Switch theme"
+      >
+        <svg
+          class="icon icon--moon"
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M21 13.3A8.5 8.5 0 0 1 10.7 3a7 7 0 1 0 10.3 10.3Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <svg
+          class="icon icon--sun"
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+          <path
+            d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.4 1.4M17.6 17.6 19 19M19 5l-1.4 1.4M6.4 17.6 5 19"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+
       <header class="header">
         <h1 class="title">Tic‑Tac‑Toe</h1>
         <p class="subtitle">Two players, one device.</p>
@@ -18,7 +61,7 @@
         <div class="top-row">
           <p id="status" class="status" role="status" aria-live="polite"></p>
           <div class="controls">
-            <button id="themeToggle" class="button" type="button" aria-pressed="true">Theme: Dark</button>
+            <button id="instructionsBtn" class="button" type="button">Instructions</button>
             <button id="restart" class="button" type="button">Restart</button>
           </div>
         </div>
@@ -35,11 +78,28 @@
           <button class="cell" type="button" data-index="8" role="gridcell" tabindex="-1"></button>
         </div>
 
-        <p class="help" id="help">
-          Keyboard: Arrow keys move. Enter/Space places. Optional: press 1–9 (top-left = 1) to
-          place, R to restart, and T to toggle theme.
-        </p>
       </section>
+
+      <dialog class="modal" id="instructionsDialog" aria-labelledby="instructionsTitle">
+        <div class="modal-header">
+          <h2 class="modal-title" id="instructionsTitle">Instructions</h2>
+          <button class="button" type="button" id="instructionsClose">Close</button>
+        </div>
+
+        <div class="modal-body">
+          <p class="modal-lead">Click/tap a square (or use the keyboard below). Get 3 in a row to win.</p>
+
+          <h3 class="modal-section-title">Keyboard</h3>
+          <ul class="modal-list">
+            <li><strong>Arrow keys</strong>: move focus</li>
+            <li><strong>Enter</strong> / <strong>Space</strong>: place mark</li>
+            <li><strong>1–9</strong>: place directly (1 = top-left)</li>
+            <li><strong>R</strong>: restart game</li>
+            <li><strong>T</strong>: toggle light/dark theme</li>
+            <li><strong>Esc</strong>: close this dialog</li>
+          </ul>
+        </div>
+      </dialog>
     </main>
   </body>
 </html>

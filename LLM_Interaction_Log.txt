@@ -40,8 +40,26 @@ Added a light/dark theme toggle:
 - If no choice is saved, the app follows the system color scheme
 - Keyboard shortcut: T toggles the theme
 
-PROMPT #2:
 
-Add a configurable dark/light mode to the app
+PROMPT #3:
+
+Move the theme button outside the Tik Tac Toe card to the top right corner of the screen, and change it to an icon button where a moon icon indicates "switch to dark mode", or, if in dark mode, the button should display a sun, indicating "switch to light mode".
 
 RESPONSE:
+
+Moved the theme toggle to a fixed icon button in the top-right corner of the screen:
+- Light mode shows a moon icon (switch to dark)
+- Dark mode shows a sun icon (switch to light)
+- The button keeps the same behavior (click or press T to toggle) and updates its accessible label/title accordingly
+
+
+PROMPT #4:
+
+Now, move the Kayboard instructions. They should appear in a pop-up modal when a "Instructions" button is clicked. Make them as clear, descriptive and succinct.
+
+RESPONSE:
+
+Moved the keyboard instructions into an "Instructions" modal:
+- Added an "Instructions" button in the game card header
+- Clicking it opens a pop-up dialog with concise gameplay + keyboard controls
+- The dialog can be closed via Close button, clicking outside, or Esc
